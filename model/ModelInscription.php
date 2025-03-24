@@ -11,36 +11,32 @@ class ModelInscription
        
     }
     //insertion dans la base de donner
-    public function Saveusers($id,$email, $password, $username,$role_id) {
+    
 
-        $hashed_Password = password_hash($password, PASSWORD_DEFAULT);
-        $query = $this->database->prepare("INSERT INTO users (id, email, hashed_Password, username, role_id) VALUES (?, ?, ?, ?,?)");
-        // Utilisation de bindParam pour chaque paramètre
-        // $query->bindParam(':id', $id);
-        // $query->bindParam(':email', $email);
-        // $query->bindParam(':password', $hashedPassword);
-        // $query->bindParam(':username', $username);
-        // $query->bindParam(':role_id', $role_id);
-       
-        $query->execute([1, $username, $email, $hashed_Password, 2]);
-        // return $query->execute();
-           // Exécuton La requête
-        // if ($query->execute([
-        //     'id' => $password,
-        //     'username' => $username,
-        //     'email' => $email,
-        //     'password' => $password,
-        //     'role_id' => $role_id,
-        // ])) {
-        //     echo "Inscription réussie!";
-        // } else {
-        //     echo "Erreur lors de l'inscription.";
-        // }
+        public function Saveusers($username, $email, $password,$role_id) {
+            // Vérifiez d'abord si le username existe déjà
+            $stmt = $this->database->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
+            $stmt->execute([':username' => $username]);
+            $exists = $stmt->fetchColumn();
         
-    }
+            if ($exists > 0) {
+                throw new Exception("Ce nom d'utilisateur est déjà pris.");
+            }
+        
+            // Si le nom d'utilisateur n'existe pas, procédez à l'insertion
+            $stmt = $this->database->prepare("INSERT INTO users (username, email, password, role_id) VALUES (:username, :email, :password, :role_id)");
+            $stmt->execute([
+                ':username' => $username,
+                ':email' => $email,
+                ':password' => $password,
+                ':role_id' => $role_id
+            ]);
+        }
+        
+    
     // Vérifier si l'email existe déjà
     public function emailExists($email) {
-        $query = $this->database->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+        $query = $this->database->prepare('SELECT COUNT(*) FROM users WHERE email = :email');
         $query->bindParam(':email', $email);
         $query->execute();
         return $query->fetchColumn() > 0;

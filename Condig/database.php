@@ -1,10 +1,10 @@
 <?php 
 //connexion a la base
 class  database{
-        public static $HOST ='localhost';
-        public static $DbNAME= 'brief-3';
-        public static $username ='root';
-        public static $password = '';
+        private static $HOST ='localhost';
+        private static $DbNAME= 'brief_3';
+        private static $username ='root';
+        private static $password = '';
 
         public static $connexion = null ;
 
