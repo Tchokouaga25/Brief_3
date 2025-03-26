@@ -30,11 +30,20 @@ class ModelConnexion {
 
     // Récupérer l'historique de connexion
     public function getConnectionHistory($userId) {
-        $query = $this->database->prepare('SELECT * FROM connection_history WHERE user_id = :user_id ORDER BY connection_time DESC');
+        $query = $this->database->prepare('SELECT * FROM login_history WHERE user_id = :user_id ORDER BY login_time DESC');
         $query->bindParam(':user_id', $userId);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $query->execute();
+            // Retournez les résultats sous forme de tableau
+            return $query->fetchAll(PDO::FETCH_ASSOC) ?: []; // Retourne un tableau vide si aucun résultat
+        } catch (PDOException $e) {
+            // Gérer l'erreur ici, éventuellement logger ou retourner un message d'erreur
+            echo "Erreur : " . $e->getMessage();
+            return []; // Assurez-vous de retourner un tableau vide en cas d'erreur
+        }
+
     }
+    
     
 }
 ?>

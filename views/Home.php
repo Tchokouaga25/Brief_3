@@ -16,13 +16,14 @@
     <div class="grid grid-cols-4 items-center justify-center gap-2">
         
             <button class=" w-40 text-white p-4 rounded bg-indigo-500 shadow-md flex items-center justify-center"><a href="../views/Home.php">Acceuil</a></button>
-       
-        
+     
             <button class="w-40 p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center"><a href="../views/Views_dashboadClient.php">Mon Profile</a></button>
        
             <button  class="w-40 p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center"><a href="../views/ViewsInscription.php"> s'inscrire</a> </button>
         
             <button class="w-40 p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center"><a href="../views/Views_connection.php"> se connecter</a></button>
+
+            <button class="w-40 p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center"><a href="../views/Views_connection.php"> se deconnecter</a></button>
         
     </div>
     <div

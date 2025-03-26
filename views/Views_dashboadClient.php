@@ -1,10 +1,26 @@
+<?php 
+
+require_once (__DIR__ .'/../Condig/database.php');
+require_once(__DIR__ .'/../controller/ControllerAdmin.php');
+
+$database = database::getConnection();
+
+// Instantiation des deux contrôleurs
+
+$nombre = new ControllerAdmin($database);
+$Nombre= $nombre->getAllUsers();
+$Adminne= $nombre->getAllAdming();
+$Client= $nombre->getAllClient();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Document</title>
 </head>
 <body class="bg-[#D9D9D9]">
@@ -135,14 +151,60 @@
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 ">
              <!-- Your content -->
                 <div class="  grid grid-cols-4 items-center justify-center gap-2">
-
-                    <button class=" p-4 rounded bg-white text-black shadow-xl "><a href="../views/Views_dashboadClient.php">Utilisateur</a></button>
+                 <div class=" p-4 rounded bg-white text-black  shadow-xl ">
+                    <h4 class="test-lg font-bold"><i class="fa fa-user" aria-hidden="true"></i> Nombre Totale utilisateur</h4>
+                    <?php 
+                        echo " <p class='text-2xl font-semibold'>".$Nombre['total']."</p>"
+                    ?>
+                 </div>
+                 <div class=" p-4 rounded bg-white text-black  shadow-xl ">
+                    <h4 class="test-lg font-bold"><i class="fa fa-user" aria-hidden="true"></i> Nombre D'Administrateur</h4>
+                    <?php 
+                        echo " <p class='text-2xl font-semibold'>".htmlspecialchars($Adminne)."</p>"
+                    ?>
+                 </div>
+                 <div class=" p-4 rounded bg-white text-black  shadow-xl ">
+                    <h4 class="test-lg font-bold"><i class="fa fa-user" aria-hidden="true"></i> Nombre de client</h4>
+                    <?php 
+                        echo " <p class='text-2xl font-semibold'>".htmlspecialchars($Client)."</p>"
+                    ?>
+                 </div>
+                    <h4 class="test-lg font-bold"><i class="fa fa-user" aria-hidden="true"></i> liste des utilisateurs</h4>
             
-                    <button  class=" p-4 rounded bg-white text-black  shadow-xl "><a href="../views/ViewsInscription.php">Administration</a> </button>
-                
-                    <button class=" p-4 rounded bg-white text-black  shadow-xl "><a href="../views/Views_connection.php"> Clients</a></button>
-                
+                    
                 </div>
+                
+            </div>
+            <div class="mx-auto max-w-6.5xl  py-6 rounded bg-white text-black shadow-xl sm:px-6 lg:px-8 ">
+             <!-- Your content -->
+                <table class="min-w-full bg-white border border-gay-300 rounded-lg shadow-md">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600">
+                            <th class = "py-2 px-4 border">id</th>
+                            <th class = "py-2 px-4 border">Nom</th>
+                            <th class = "py-2 px-4 border">Email</th>
+                            <th class = "py-2 px-4 border">Status</th>
+                            <th class = "py-2 px-4 border">Actions</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <?php foreach ( $users as $user) : ?>
+                            <tr>
+                                <td class="px-6 py-4"><?= htmlspecialchars($user['id']); ?> </td>
+                                <td class="px-6 py-4"><?= htmlspecialchars($user['username']); ?> </td>
+                                <td class="px-6 py-4"><?= htmlspecialchars($user['email']); ?> </td>
+                                <td class="px-6 py-4"><?= htmlspecialchars($user['status']); ?> </td>
+                                <td class= "px-6 py-4">
+                                        <form method="POST" action="../Router/Router.php?action=list_utilisateur" class="inline">
+                                            <input type="hidden" name="user_id" value="<?= htmlspecialchars($user['id']); ?>">
+                                            <button type="submit" class="text-red-500 hove:text-red-700">Supprimer</button>
+                                        </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <tbody>
+                </table>
                 
             </div>
             <div class="mx-auto max-w-6.5xl  py-6 rounded bg-white text-black shadow-xl sm:px-6 lg:px-8 ">

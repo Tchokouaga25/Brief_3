@@ -22,38 +22,43 @@
   </div>
     <form method="POST" action="../Router/Router.php?action=inscription" class="mx-auto mt-16 max-w-xl sm:mt-20">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-        <div>
-            <label for="first-name" class="block text-sm/6 font-semibold text-gray-900">username</label>
-            <div class="mt-2.5">
-            <input type="text" name="username" id="username" autocomplete="given-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+            <div class="sm:col-span-2">
+                <label for="first-name" class="block text-sm/6 font-semibold text-gray-900">username</label>
+                <div class="mt-2.5">
+                    <input type="text" name="username" id="username" autocomplete="given-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+                </div>
             </div>
-        </div>
-        <div class="sm:col-span-2">
-            <label for="email" class="block text-sm/6 font-semibold text-gray-900">Email</label>
-            <div class="mt-2.5">
-            <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+            <div class="sm:col-span-2">
+                <label for="email" class="block text-sm/6 font-semibold text-gray-900">Email</label>
+                <div class="mt-2.5">
+                    <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+                </div>
             </div>
-        </div>
-        <div>
-            <label for="password" class="block text-sm/6 font-semibold text-gray-900">Password</label>
-            <div class="mt-2.5">
-            <input type="password" name="password" id="password" autocomplete="family-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+            <div>
+                <label for="password" class="block text-sm/6 font-semibold text-gray-900">Password</label>
+                <div class="mt-2.5">
+                    <input type="password" name="password" id="password" autocomplete="family-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+                </div>
             </div>
-        </div>
-        
-        <div>
-            <label for="role_id" class="block text-sm/6 font-semibold text-gray-900">Role</label>
-            <div class="mt-2.5">
-            <input type="number" name="role_id" id="role_id" autocomplete="family-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+            
+            <div>
+                <label for="role_id" class="block text-sm/6 font-semibold text-gray-900">Role</label>
+                <div class="mt-2.5">
+                <!-- <input type="number" name="role_id" id="role_id" autocomplete="family-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required> -->
+                <select id="choix" name="choix" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+                        
+                        <option value="option1">Clients</option>
+                        <option value="option2">Admin</option>
+                </select>
+                </div>
             </div>
-        </div>
 
+            </div>
+                <div class="mt-10">
+                    <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">S'inscrire</button>
+                </div>
+            </div>
         </div>
-            <div class="mt-10">
-            <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">S'inscrire</button>
-        </div>
-        
-        
     </form>
 </div>
 
