@@ -1,5 +1,14 @@
 <?php
  require_once __DIR__ .'/../controller/ControllerInscription.php';
+ require_once __DIR__ .'/../Condig/database.php';
+ require_once __DIR__ .'/../model/ModelRole.php';
+ require_once __DIR__ .'/../controller/ControllerRole.php';
+
+ $database = new database();
+
+ $database = $database->getPDO();
+ $modelRole = new modelRole($database);
+ $roles = $modelRole->getRoles();
 ?>
 
 <!DOCTYPE html>
@@ -16,14 +25,31 @@
   <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" aria-hidden="true">
     <div class="relative left-1/2 -z-10 aspect-1155/678 w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
   </div>
+  <div class="absolute top-4 text-center">
+    <?php 
+        if(session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    ?>
+    <?php 
+        if(!empty($_SESSION['error'])): ?>
+             <p class="text-red-500"><?=$_SESSION['error'];unset($_SESSION['error']);?></p>
+    <?php endif; ?>
+    <?php 
+        if(!empty($_SESSION['success'])): ?>
+             <p class="text-green-500"><?=$_SESSION['success'];unset($_SESSION['success']);?></p>
+    <?php endif; ?>
+
+  </div>
   <div class="mx-auto max-w-2xl text-center">
     <h2 class="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Inscription</h2>
     <p class="mt-2 text-lg/8 text-gray-600">Veuillez rempir vos information.</p>
   </div>
+
     <form method="POST" action="../Router/Router.php?action=inscription" class="mx-auto mt-16 max-w-xl sm:mt-20">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div class="sm:col-span-2">
-                <label for="first-name" class="block text-sm/6 font-semibold text-gray-900">username</label>
+                <label for="first-name" class="block text-sm/6 font-semibold text-gray-900">Nom Complet</label>
                 <div class="mt-2.5">
                     <input type="text" name="username" id="username" autocomplete="given-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
                 </div>
@@ -45,11 +71,12 @@
                 <label for="role_id" class="block text-sm/6 font-semibold text-gray-900">Role</label>
                 <div class="mt-2.5">
                 <!-- <input type="number" name="role_id" id="role_id" autocomplete="family-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required> -->
-                <select id="choix" name="choix" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
-                        
-                        <option value="option1">Clients</option>
-                        <option value="option2">Admin</option>
-                </select>
+                    <select id="role_id" name="role_id" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+                            <option value="">-- Selectionnez un role --</option>
+                            <?php foreach ( $roles as $role): ?>
+                                <option value="<?= $role['id']; ?>"><?= $role['name']; ?></option>
+                            <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
 

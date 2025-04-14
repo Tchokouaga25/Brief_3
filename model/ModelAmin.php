@@ -14,8 +14,8 @@ class ModelAmin {
     }
     
     public function getAllAdmin($role) {
-        $stmt = $this->database->prepare("SELECT COUNT(*) AS total FROM users WHERE role_id = :role");
-        $stmt->execute([':role' => $role]); // Exécution de la requête
+        $stmt = $this->database->prepare("SELECT COUNT(*) AS total FROM users WHERE role_id = :name");
+        $stmt->execute([':name' => $role]); // Exécution de la requête
         $result= $stmt->fetch(PDO::FETCH_ASSOC); // Récupère le total des utilisateurs avec ce rôle
 
         var_dump($result);

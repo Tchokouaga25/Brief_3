@@ -23,7 +23,7 @@
         
             <button class="w-40 p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center"><a href="../views/Views_connection.php"> se connecter</a></button>
 
-            <button class="w-40 p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center"><a href="../views/Views_connection.php"> se deconnecter</a></button>
+            <button class="w-40 p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center"><a href="../Router/Router.php?action=logout"> se deconnecter</a></button>
         
     </div>
     <div

@@ -5,7 +5,14 @@ require_once(__DIR__ .'/../controller/ControllerInscription.php');
 require_once(__DIR__ .'/../controller/ControllerConnexion.php');
 require_once(__DIR__ .'/../controller/ControllerAdmin.php');
 
-$database = database::getConnection();
+
+
+
+$database = new database();
+
+// Récupérer la connexion via getConnection()
+$database = $database->getPDO();
+
 $action = $_GET['action'] ?? '';
 
 // Instantiation des deux contrôleurs
@@ -18,22 +25,25 @@ switch ($action) {
         require '../views/Home.php';
        break;
     case 'inscription':
-        $controllerInscription->Save(); 
-        // require '../views/Views_connection.php';
+        $controllerInscription->Save();
         break;
     case 'login':
         $controllerConnexion->login();
         break;
     case 'logout':
         $controllerConnexion->logout();
+        require '../views/Home.php';
         break;
     case 'history':
         $controllerConnexion->viewHistory();
         break;
 
     case 'list_users':
-        require '../views/Views_dashboadClient.php';
         $ControllerAdmin->getAllUsers();
+        break;
+    case 'inde':
+        require '../views/ViewsInscription.php';
+        $controllerInscription->index();
         break;
     case 'list_Admin':
         require '../views/Views_dashboadClient.php';
@@ -47,9 +57,49 @@ switch ($action) {
         require '../views/Views_dashboadClient.php';
         $ControllerAdmin->ListeUsers();
         break;
+
+    case 'add':
+        $controllerInscription->addUser();
+        break;
+    case 'edit':
+        $userId = $_POST['id'] ?? null; // Utiliser POST au lieu de GET et 'id' au lieu de 'userId'
+        if ($userId) {
+            $controllerInscription->editUser($userId);
+        } else {
+            echo "Error: Missing user id parameter.";
+        }       
+        break;
+    case 'delete':
+        $controllerInscription->deleteUser();
+        break;
+    // default:
+    //     $userController->index();
     default:
         require '../views/Home.php'; // Page par défaut
-        break;
+
+        // Gestion des routes
+
+
+
 }
 
 ?>
+<?php
+// Code PHP ici
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Client</title>
+    <!-- Inclusion du fichier JavaScript -->
+    <script src="../Script/script.js"></script>
+"></script>
+
+    
+</head>
+<body>
+    <!-- Contenu de la page -->
+    <script src="../Script/script.js"></script>
+</body>
+</html>

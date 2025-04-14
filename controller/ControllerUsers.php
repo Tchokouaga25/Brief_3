@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__ .'/../Condig/database.php';
-require_once '../model/ModelUsers.php';
+require_once __DIR__ .'/../model/ModelUsers.php';
+require_once __DIR__ .'/../model/ModelRole.php';
 
-$database = database::getConnection();
 class ControllerUsers {
     private $userModel;
-    private static $users;
     private $database;
+
     public function __construct($database) {
-        $this->database= $database;
+        $this->database = $database;
         $this->userModel = new ModelUsers($database);
     }
 

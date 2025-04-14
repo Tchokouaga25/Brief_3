@@ -2,8 +2,12 @@
 require_once __DIR__ .'/../Condig/database.php';
 require_once __DIR__ .'/../model/ModelAmin.php';
 require_once __DIR__ .'/../model/ModelInscription.php';
+$database = new database();
 
-$database = database::getConnection();
+// Récupérer la connexion via getConnection()
+$database = $database->getPDO();
+
+// $database = database::getConnection();
 class ControllerAdmin{
     public $database ;
     public $modeladmin ;
